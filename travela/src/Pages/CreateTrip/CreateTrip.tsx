@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { TextField, Typography } from '@mui/material';
 import { Container } from '@mui/system';
 import { useState } from 'react';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
@@ -16,8 +16,14 @@ type Option = {
   };
 };
 const CreateTrip:React.FC = () => {
-  const [place, setPlace] = useState<Option | null>(null);
 
+  const [place, setPlace] = useState<Option | null>(null);
+  const [inputValue, setInputValue] = useState<number>();
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setInputValue(Number(value));
+  };
   return (
     <div className='create-trip'>
       <Container maxWidth="md" sx={{padding: '10px'}}>
@@ -39,12 +45,22 @@ const CreateTrip:React.FC = () => {
               onChange: (newValue: Option | null) => {
                 setPlace(newValue);
                 console.log(newValue);
-              },
+              }
             }}
-          />
+            />
         </div>
         <div>
-
+          <Typography variant='h2' sx={{ fontSize: '20px', lineHeight: '28px', mt: '12px', mb: '12px', fontWeight: '550' }}>
+            What is your destination of choice?
+          </Typography>
+          <TextField
+            label="Example: 3"
+            variant="outlined"
+            type="number"
+            value={inputValue}
+            onChange={handleInputChange}
+            fullWidth
+          />
         </div>
       </div>
       </Container>
