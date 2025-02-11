@@ -1,22 +1,53 @@
 import { Typography } from '@mui/material';
+import { Container } from '@mui/system';
+import { useState } from 'react';
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import './CreateTrip.css';
+type Option = {
+  label: string;
+  value: {
+    description: string;
+    place_id: string;
+    reference: string;
+    structured_formatting: {
+      main_text: string;
+      secondary_text: string;
+    };
+  };
+};
 const CreateTrip:React.FC = () => {
+  const [place, setPlace] = useState<Option | null>(null);
 
   return (
     <div className='create-trip'>
+      <Container maxWidth="md" sx={{padding: '10px'}}>
       <Typography variant = 'h3'  sx={{ fontWeight: 550 }}>
         Tell us your travel preference
       </Typography>
       <Typography variant='subtitle1' component='p' sx={{ color: '#6b7280', fontSize: '20px', mt: '12px' }}>
         Just provide some basic information, and our trip planner will generate a customized itinerary based on your preferences.
       </Typography>
-      <div>
+      <div className='create-trip-info'>
         <div>
-          <Typography variant='h2' sx={{ fontSize: '20px', lineHeight: '28px', mt: '12px', mb: '12px', fontWeight: '500' }}>
+          <Typography variant='h2' sx={{ fontSize: '20px', lineHeight: '28px', mt: '12px', mb: '12px', fontWeight: '550' }}>
             What is your destination of choice?
           </Typography>
+          <GooglePlacesAutocomplete
+            apiKey={import.meta.env.VITE_GOOGLE_PLACE_API_KEY}
+            selectProps={{
+              value: place,
+              onChange: (newValue: Option | null) => {
+                setPlace(newValue);
+                console.log(newValue);
+              },
+            }}
+          />
+        </div>
+        <div>
+
         </div>
       </div>
+      </Container>
     </div>
   )
 }
