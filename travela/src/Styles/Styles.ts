@@ -30,7 +30,12 @@ const useStyles = makeStyles<Styles>(() =>({
   },
   headerSub: {
     textAlign: 'center',
-  }
+  },
+  createTripPara: {
+    color: '#6b7280',
+    fontSize: '20px',
+    marginTop: '12px',
+  },
 }));
 
 export { ColorButton, useStyles };
