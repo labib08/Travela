@@ -1,16 +1,14 @@
-import './App.css'
-import Header from './Components/Header/Header'
+import './App.css';
+import Header from './Components/Header/Header';
 
-function App() {
-
-
+const App: React.FC = () => {
   return (
     <>
       <div>
-        <Header/>
+        <Header />
       </div>
     </>
-  )
+  );
 }
 
 export default App
