@@ -1,6 +1,12 @@
 import { Button, ButtonProps, styled } from '@mui/material';
 import { makeStyles } from "@mui/styles";
 
+interface Styles {
+  navbarName: string;
+  headerH2: string;
+  headerSub: string;
+}
+
 const ColorButton = styled(Button)<ButtonProps>(({}) => ({
   color: 'white',
   backgroundColor: 'rgb(217, 48, 147)',
@@ -11,7 +17,7 @@ const ColorButton = styled(Button)<ButtonProps>(({}) => ({
   height: '48px',
   width: '136px',
 }));
-const useStyles = makeStyles(() =>({
+const useStyles = makeStyles<Styles>(() =>({
   navbarName: {
       fontWeight: 700,
   },

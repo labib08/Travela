@@ -5,7 +5,6 @@ import { useStyles } from '../../Styles/Styles';
 import './Header.css';
 const Header: React.FC = () => {
   const classes = useStyles();
-  console.log(classes);
   return (
     <div className='header'>
 
