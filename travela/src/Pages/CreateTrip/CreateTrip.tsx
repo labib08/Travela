@@ -1,7 +1,7 @@
 import { SelectedBudgetOption, SelectedTravelList } from "@/Data/data";
 import { Button, TextField, Typography } from "@mui/material";
 import { Container } from "@mui/system";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { toast, ToastContainer } from 'react-toastify';
 
@@ -51,6 +51,26 @@ const CreateTrip: React.FC = () => {
   useEffect(()=>{
     console.log(formData)
   },[formData])
+
+  const numDaysRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    const numDaysInput = numDaysRef.current;
+
+    if (numDaysInput) {
+
+      numDaysInput.addEventListener("wheel", (e) => e.preventDefault(), {
+        passive: false,
+      });
+    }
+
+
+    return () => {
+      if (numDaysInput) {
+        numDaysInput.removeEventListener("wheel", (e) => e.preventDefault());
+      }
+    };
+  }, []);
 
   return (
     <div className="create-trip">
@@ -120,6 +140,7 @@ const CreateTrip: React.FC = () => {
               label="Example: 3"
               variant="outlined"
               type="number"
+              inputRef={numDaysRef}
               color="secondary"
               value={formData.numDays ?? ""}
               onChange={(e) => {
