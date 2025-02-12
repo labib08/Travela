@@ -5,7 +5,8 @@
     justify-content: center;
     min-height: 100vh;
     font-family: 'Jost', sans-serif;
-    background:linear-gradient(to bottom, #1c5d9e, rgb(160, 28, 105));
+    /* background:linear-gradient(to bottom, #1c5d9e, rgb(160, 28, 105)); */
+    background:linear-gradient(to bottom, #0f0c29, #3d3977, #39395d) ;
 }
 #chk {
     display: none;
