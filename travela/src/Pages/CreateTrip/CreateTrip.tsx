@@ -1,8 +1,9 @@
 import { SelectedBudgetOption, SelectedTravelList } from "@/Data/data";
-import { TextField, Typography } from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
 import { Container } from "@mui/system";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
+
 import "./CreateTrip.css";
 type Option = {
   label: string;
@@ -16,14 +17,35 @@ type Option = {
     };
   };
 };
+type FormData = {
+  location?: Option | null;
+  numDays?: number;
+  budget?: string;
+  numTravelers?: string;
+};
 const CreateTrip: React.FC = () => {
   const [place, setPlace] = useState<Option | null>(null);
-  const [inputValue, setInputValue] = useState<number>();
+  const [formData, setFormData] = useState<FormData>({
+    location: null,
+  });
+  const [selectedTravelItem, setSelectedTravelItem] = useState<number | null>(null);
+  const [selectedBudgetItem, setSelectedBudgetItem] = useState<number | null>(null);
+  const handleInputChange=(name: string, value: Option | null | number |string) => {
+    setFormData({
+      ...formData,
+      [name]: value
+    })
+  }
+  const onGenerateTrip=()=> {
+    if (formData && formData.numDays && (formData.numDays > 5 || formData.numDays < 1)) {
+      return;
+    }
+    console.log(formData);
+  }
+  useEffect(()=>{
+    console.log(formData)
+  },[formData])
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setInputValue(value === "" ? undefined : Number(value));
-  };
   return (
     <div className="create-trip">
       <Container maxWidth="md" sx={{ padding: "10px" }}>
@@ -59,6 +81,17 @@ const CreateTrip: React.FC = () => {
                 onChange: (newValue: Option | null) => {
                   setPlace(newValue);
                   console.log(newValue);
+                  handleInputChange('location',newValue);
+                },
+                styles: {
+                  control: (provided, state) => ({
+                    ...provided,
+                    borderColor: state.isFocused ? '#9c27b0' : '#cccccc',
+                    boxShadow: state.isFocused ? '0 0 0 1px #9c27b0' : 'none',
+                    '&:hover': {
+                      borderColor: state.isFocused ? '#9c27b0' : '#cccccc',
+                    },
+                  }),
                 },
               }}
             />
@@ -80,8 +113,12 @@ const CreateTrip: React.FC = () => {
               label="Example: 3"
               variant="outlined"
               type="number"
-              value={inputValue ?? ""}
-              onChange={handleInputChange}
+              color="secondary"
+              value={formData.numDays ?? ""}
+              onChange={(e) => {
+                const value = e.target.value === "" ? null : Number(e.target.value);
+                handleInputChange('numDays', value);
+              }}
               fullWidth
               sx={{
                 "& .MuiOutlinedInput-root": {
@@ -117,7 +154,13 @@ const CreateTrip: React.FC = () => {
             {SelectedBudgetOption.map((item, index) => (
               <div
                 key={index}
-                className="create-trip-budget-section"
+                onClick={() => {
+                  handleInputChange('budget', item.title);
+                  setSelectedBudgetItem(index);
+                }}
+                className={`create-trip-budget-section ${
+                  selectedBudgetItem === index ? 'selected' : ''
+                }`}
               >
                 <h2 className="text-4xl"> {item.icon} </h2>
                 <Typography
@@ -154,9 +197,15 @@ const CreateTrip: React.FC = () => {
           </Typography>
           <div className="create-trip-budget">
             {SelectedTravelList.map((item, index) => (
-              <div
+               <div
                 key={index}
-                className="create-trip-budget-section"
+                onClick={() => {
+                  handleInputChange('numTravelers', item.people);
+                  setSelectedTravelItem(index);
+                }}
+                className={`create-trip-budget-section ${
+                  selectedTravelItem === index ? 'selected' : ''
+                }`}
               >
                 <h2 className="text-4xl"> {item.icon} </h2>
                 <Typography
@@ -176,7 +225,11 @@ const CreateTrip: React.FC = () => {
               </div>
             ))}
           </div>
-
+          <div className="create-trip-button">
+            <Button variant="contained" className="header-button" onClick={onGenerateTrip}>
+              Generate Trip
+            </Button>
+          </div>
         </div>
       </Container>
     </div>
