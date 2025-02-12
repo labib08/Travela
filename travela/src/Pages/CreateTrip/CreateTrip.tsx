@@ -3,6 +3,7 @@ import { Button, TextField, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import { useEffect, useState } from "react";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
+import { toast, ToastContainer } from 'react-toastify';
 
 import "./CreateTrip.css";
 type Option = {
@@ -38,6 +39,11 @@ const CreateTrip: React.FC = () => {
   }
   const onGenerateTrip=()=> {
     if (formData && formData.numDays && (formData.numDays > 5 || formData.numDays < 1)) {
+      toast.error('Number of days must be between 1 and 5.');
+      return;
+    }
+    if(!formData.numDays || !formData.budget || !formData.location || !formData.numTravelers) {
+      toast.error('Please fill all details');
       return;
     }
     console.log(formData);
@@ -48,6 +54,7 @@ const CreateTrip: React.FC = () => {
 
   return (
     <div className="create-trip">
+      <ToastContainer />
       <Container maxWidth="md" sx={{ padding: "10px" }}>
         <Typography variant="h3" sx={{ fontWeight: 550 }}>
           Tell us your travel preference
