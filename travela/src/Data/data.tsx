@@ -20,21 +20,21 @@ export const SelectedTravelList:TravelOption[] = [
     },
     {
         id: 2,
-        title: "Family Trip",
-        icon: '★',
+        title: "A Couple",
+        icon: '🥂',
         people: "4",
       },
       {
         id: 3,
-        title: "Party Vacation",
-        icon: '🏠',
-        people: "6+",
+        title: "Family",
+        icon: '🏡',
+        people: "3-6",
       },
       {
         id: 4,
-        title: "Adventure Travel",
-        icon: '🏠',
-        people: "2-5",
+        title: "Friends",
+        icon: '⛵',
+        people: "3+",
       },
 ]
 
