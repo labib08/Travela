@@ -1,22 +1,22 @@
 .signup {
     display: flex;
     width: 100%;
-
+    align-items: center;
     justify-content: center;
     min-height: 100vh;
     font-family: 'Jost', sans-serif;
-    background:linear-gradient(to bottom, #0f0c29, #302b63, #24243e) ;
+    background:linear-gradient(to bottom, #1c5d9e, rgb(160, 28, 105));
 }
 #chk {
     display: none;
 }
 .signup-main {
+    margin-top: -120px;
     position: relative;
-
     height: 100%;
     width: 500px;
 }
-.signup-main-label {
+label {
     color: #fff;
     font-size: 2.3em;
     justify-content: center;
@@ -27,7 +27,7 @@
     transition: 0.5s ease-in-out;
 }
 
-.signup-main input {
+ input {
     width: 60%;
     height: 20px;
     background: #e0dede;
@@ -58,4 +58,13 @@
 }
 .signup-main button:hover {
     background: #6d448b;
+}
+
+.login {
+    height: 460px;
+    background: #eee;
+    border-radius: 60% / 10%;
+    transform: translateY(-180px);
+    transition: 0.8s ease-in-out;
+
 }
