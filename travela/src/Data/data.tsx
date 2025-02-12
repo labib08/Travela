@@ -3,6 +3,14 @@ export type TravelOption = {
     title: string;
     icon: string;
     desc: string;
+    people: string;
+  };
+
+export type BudgetOption = {
+    id: number;
+    title: string;
+    icon: string;
+    desc: string;
   };
 
 export const SelectedTravelList:TravelOption[] = [
@@ -11,28 +19,32 @@ export const SelectedTravelList:TravelOption[] = [
         title: 'Solo',
         icon: '✈',
         desc: 'A sole travel in exploration',
+        people: "1 People"
     },
     {
         id: 2,
         title: "Couple",
         icon: '🥂',
         desc: "Two travellers",
+        people: "2 People"
       },
       {
         id: 3,
         title: "Family",
         icon: '🏡',
         desc: "A group of fun loving adv",
+        people: "3 to 5 People"
       },
       {
         id: 4,
         title: "Friends",
         icon: '⛵',
         desc: "A bunch of thrill seeks",
+        people: "5 to 10 People"
       },
 ]
 
-export const SelectedBudgetOption:TravelOption[] = [
+export const SelectedBudgetOption:BudgetOption[] = [
     {
         id:1,
         title:'Cheap',
