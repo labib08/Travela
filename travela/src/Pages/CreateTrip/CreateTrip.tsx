@@ -1,4 +1,4 @@
-import { SelectedBudgetOption } from "@/Data/data";
+import { SelectedBudgetOption, SelectedTravelList } from "@/Data/data";
 import { TextField, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import { useState } from "react";
@@ -113,11 +113,11 @@ const CreateTrip: React.FC = () => {
           >
             What is your Budget?
           </Typography>
-          <div className="create-trip-budget grid grid-cols-3 gap-5 mt-5">
+          <div className="create-trip-budget">
             {SelectedBudgetOption.map((item, index) => (
               <div
                 key={index}
-                className="create-trip-budget-section p-4 border rounded-lg hover:shadow"
+                className="create-trip-budget-section"
               >
                 <h2 className="text-4xl"> {item.icon} </h2>
                 <Typography
@@ -137,6 +137,46 @@ const CreateTrip: React.FC = () => {
               </div>
             ))}
           </div>
+
+        </div>
+        <div>
+          <Typography
+            variant="h2"
+            sx={{
+              fontSize: "20px",
+              lineHeight: "28px",
+              mt: "40px",
+              mb: "12px",
+              fontWeight: "550",
+            }}
+          >
+            Who do you plan on to travel with?
+          </Typography>
+          <div className="create-trip-budget">
+            {SelectedTravelList.map((item, index) => (
+              <div
+                key={index}
+                className="create-trip-budget-section"
+              >
+                <h2 className="text-4xl"> {item.icon} </h2>
+                <Typography
+                  sx={{
+                    fontSize: "20px",
+                    fontWeight: "600",
+                    marginBottom: "3px",
+                  }}
+                >
+                  {" "}
+                  {item.title}{" "}
+                </Typography>
+                <Typography sx={{ fontSize: "13px", color: "#6b7280" }}>
+                  {" "}
+                  {item.desc}{" "}
+                </Typography>
+              </div>
+            ))}
+          </div>
+
         </div>
       </Container>
     </div>
