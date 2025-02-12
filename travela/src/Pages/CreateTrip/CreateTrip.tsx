@@ -22,7 +22,7 @@ const CreateTrip: React.FC = () => {
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    setInputValue(Number(value));
+    setInputValue(value === "" ? undefined : Number(value));
   };
   return (
     <div className="create-trip">
@@ -80,16 +80,19 @@ const CreateTrip: React.FC = () => {
               label="Example: 3"
               variant="outlined"
               type="number"
-              value={inputValue}
+              value={inputValue ?? ""}
               onChange={handleInputChange}
               fullWidth
               sx={{
                 "& .MuiOutlinedInput-root": {
                   height: "40px",
                 },
+                "& .MuiInputLabel-root": {
+                  transition: "all 0.2s ease-in-out",
+                },
                 "& .MuiInputLabel-outlined": {
                   transform: "translate(14px, 10px) scale(1)",
-                  "&.Mui-focused, &.MuiInputLabel-shrink": {
+                  "&.MuiInputLabel-shrink": {
                     transform: "translate(14px, -6px) scale(0.75)",
                   },
                 },
