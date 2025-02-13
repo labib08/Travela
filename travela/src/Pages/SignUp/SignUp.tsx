@@ -1,4 +1,5 @@
-import './SignUp.css'
+import { FcGoogle } from "react-icons/fc";
+import './SignUp.css';
 const SignUp = () => {
   return (
     <div className="signup">
@@ -9,12 +10,16 @@ const SignUp = () => {
                 <input type= "text" name="txt" placeholder="Username" required/>
                 <input type= "email" name="email" placeholder="Email" required/>
                 <input type= "Password" name="password" placeholder="Password" required/>
-                <button>Sign Up</button>
+                <button className="signup-button">Sign Up</button>
                 <div className="separator-container">
                     <div className="separator-line"></div>
                     <div className="separator-text">Or Continue With</div>
                     <div className="separator-line"></div>
                 </div>
+                <button className="google-signup">
+                    <FcGoogle className="google-logo" />
+                    <span>Sign up with Google</span>
+                </button>
             </form>
         </div>
     </div>
