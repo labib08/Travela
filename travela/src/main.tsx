@@ -5,6 +5,7 @@ import App from './App.tsx';
 import Navbar from './Components/Navbar/Navbar.tsx';
 import './index.css';
 import CreateTrip from './Pages/CreateTrip/CreateTrip.tsx';
+import Login from './Pages/Login/Login.tsx';
 import SignUp from './Pages/SignUp/SignUp.tsx';
 
 const router = createBrowserRouter([
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: '/signup',
     element:<SignUp/>
+  },
+  {
+    path: '/login',
+    element:<Login/>
   },
 ])
 
