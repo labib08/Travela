@@ -40,7 +40,7 @@ label {
     outline: none;
     border-radius: 5px;
 }
-.signup-main-button {
+.signup-button {
     width: 60%;
     height: 40px;
     margin: 10px auto;
@@ -57,7 +57,7 @@ label {
     transition: .2s ease-in;
     cursor: pointer;
 }
-.signup-main-button:hover {
+.signup-button:hover {
     background: #6d448b;
 }
 
