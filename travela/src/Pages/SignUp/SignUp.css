@@ -109,7 +109,6 @@ label {
     border-radius: 5px;
     transition: 0.2s ease-in;
     cursor: pointer;
-
 }
 
 .google-signup:hover {
@@ -117,8 +116,19 @@ label {
 }
 
 .google-logo {
-
-
     height: 20px;
     width: 20px;
+}
+.signup-main p {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px ;
+    color: #e0dede;
+    font-size: 1em;
+
+}
+.signup-span {
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 5px;
 }

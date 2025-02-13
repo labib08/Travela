@@ -10,7 +10,7 @@ const SignUp = () => {
                 <input type= "text" name="txt" placeholder="Username" required/>
                 <input type= "email" name="email" placeholder="Email" required/>
                 <input type= "Password" name="password" placeholder="Password" required/>
-                <button className="signup-button">Sign Up</button>
+                <button className="signup-button">Sign up</button>
                 <div className="separator-container">
                     <div className="separator-line"></div>
                     <div className="separator-text">Or Continue With</div>
@@ -20,7 +20,9 @@ const SignUp = () => {
                     <FcGoogle className="google-logo" />
                     <span>Sign up with Google</span>
                 </button>
+                <p>Already have an account? <span className="signup-span"> Login </span></p>
             </form>
+
         </div>
     </div>
   )
