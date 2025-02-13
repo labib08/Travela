@@ -10,6 +10,11 @@ const SignUp = () => {
                 <input type= "email" name="email" placeholder="Email" required/>
                 <input type= "Password" name="password" placeholder="Password" required/>
                 <button>Sign Up</button>
+                <div className="separator-container">
+                    <div className="separator-line"></div>
+                    <div className="separator-text">Or Continue With</div>
+                    <div className="separator-line"></div>
+                </div>
             </form>
         </div>
     </div>

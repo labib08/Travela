@@ -69,3 +69,24 @@ label {
     transition: 0.8s ease-in-out;
 
 }
+
+.separator-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    margin: 20px auto;
+}
+
+.separator-line {
+    flex: 1;
+    height: 1px;
+    background-color: #e0dede;
+}
+
+.separator-text {
+    margin: 0 10px;
+    font-size: 14px;
+    font-weight: 450;
+    color: #fff;
+}
