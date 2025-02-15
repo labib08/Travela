@@ -3,7 +3,7 @@ import React from "react";
 import logo from "../../assets/newLogo.png";
 import { ColorButton } from "../../Styles/Styles";
 import "./Navbar.css";
-const Header: React.FC = () => {
+const Navbar: React.FC = () => {
   return (
     <div className="navbar">
       <div className="navbar-name">
@@ -19,4 +19,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default Navbar;
