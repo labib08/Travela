@@ -1,0 +1,8 @@
+CREATE DATABASE travela;
+
+CREATE TABLE "user"(
+    user_id SERIAL PRIMARY KEY,
+    name VARCHAR(200) NOT NULL,
+    email VARCHAR(200) UNIQUE NOT NULL,
+    password TEXT NOT NULL
+);
