@@ -3,6 +3,9 @@ import jwt from "jsonwebtoken";
 import validator from "validator";
 import pool from "../config/db.js";
 
+const loginAccount = async(req, res) => {
+
+}
 
 const createToken = (id) => {
     return jwt.sign({id}, process.env.JWT_SECRET)
@@ -45,4 +48,4 @@ const createAccount = async(req, res) => {
 
 }
 
-export { createAccount };
+export { createAccount, loginAccount };
