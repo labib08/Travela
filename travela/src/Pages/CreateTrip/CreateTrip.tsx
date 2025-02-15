@@ -1,10 +1,11 @@
-import { SelectedBudgetOption, SelectedTravelList } from "@/Data/data";
+import { AI_PROMPT, SelectedBudgetOption, SelectedTravelList } from "@/Data/data";
 import { Button, TextField, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import { useEffect, useRef, useState } from "react";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { toast, ToastContainer } from 'react-toastify';
 
+import { chatSession } from "@/engine/AiModel";
 import "./CreateTrip.css";
 type Option = {
   label: string;
@@ -37,7 +38,7 @@ const CreateTrip: React.FC = () => {
       [name]: value
     })
   }
-  const onGenerateTrip=()=> {
+  const onGenerateTrip=async()=> {
     if (formData && formData.numDays && (formData.numDays > 5 || formData.numDays < 1)) {
       toast.error('Number of days must be between 1 and 5.');
       return;
@@ -46,7 +47,16 @@ const CreateTrip: React.FC = () => {
       toast.error('Please fill all details');
       return;
     }
-    console.log(formData);
+    const FINAL_PROMPT = AI_PROMPT
+    .replace('{location}', formData?.location?.label)
+    .replace('{totalDays}', String(formData?.numDays))
+    .replace('{traveler}', formData?.numTravelers)
+    .replace('{budget}', formData?.budget)
+    .replace('{totalDays}', String(formData?.numDays))
+
+    console.log(FINAL_PROMPT)
+    const result = await chatSession.sendMessage(FINAL_PROMPT);
+    console.log(result?.response?.text());
   }
   useEffect(()=>{
     console.log(formData)
@@ -118,6 +128,10 @@ const CreateTrip: React.FC = () => {
                     '&:hover': {
                       borderColor: state.isFocused ? '#9c27b0' : '#cccccc',
                     },
+                  }),
+                  menu: (provided) => ({
+                    ...provided,
+                    zIndex: 9999,
                   }),
                 },
               }}
