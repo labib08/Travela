@@ -4,7 +4,27 @@ import validator from "validator";
 import pool from "../config/db.js";
 
 const loginAccount = async(req, res) => {
+    const {email, password} = req.body;
+    try {
+        const user = await pool.query(
+            'SELECT * from "user" WHERE email = $1',
+            [email]
+        );
+        if (user.rows.length === 0) {
+            return res.status(400).json({message: "User with this email does not exist"})
+        }
+        const isMatch = await bcrypt.compare(password, user.rows[0].password);
+        if (!isMatch) {
+            res.status(400).json({message: "Incorrect Password"});
+        }
 
+        const token = createToken(user.rows[0].user_id);
+        return res.status(200).json({token})
+
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({message: error})
+    }
 }
 
 const createToken = (id) => {
@@ -43,9 +63,6 @@ const createAccount = async(req, res) => {
         console.log(error);
         return res.status(400).json({message: error});
     }
-
-
-
 }
 
 export { createAccount, loginAccount };
