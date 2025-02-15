@@ -3,11 +3,13 @@ import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import './SignUp.css';
 interface FormData {
+    name: string;
     email: string;
     password: string;
   }
 const SignUp = () => {
     const [formData, setFormData] = useState<FormData>({
+        name: '',
         email: '',
         password: ''
       })
@@ -25,6 +27,7 @@ const SignUp = () => {
         <div className="signup-main">
             <form onSubmit={handleSubmit}>
                 <label htmlFor = "chk" aria-hidden="true" className='signup-main-label'>Sign Up</label>
+                <input type= "text" name="name" placeholder="Name" onChange={handleChange} required/>
                 <input type= "email" name="email" placeholder="Email" onChange={handleChange} required/>
                 <input type= "Password" name="password" placeholder="Password" onChange={handleChange} required/>
                 <button className="signup-button">Sign up</button>
