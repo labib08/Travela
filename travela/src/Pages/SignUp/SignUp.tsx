@@ -35,7 +35,6 @@ const SignUp = () => {
         const response = await axios.post(`${url}/api/user/create`, formData);
 
         if (response.data.success) {
-          console.log("yay");
           setIsSuccess(true);
           setOpen(true);
           setMessage("User registered successfully");
@@ -53,6 +52,7 @@ const SignUp = () => {
           setMessage(response.data.message);
           //toast.error(response.data.message);
           setLoading(false);
+          setOpen(true);
         }
       }
   return (
