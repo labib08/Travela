@@ -170,9 +170,9 @@ const CreateTrip: React.FC = () => {
                   transition: "all 0.2s ease-in-out",
                 },
                 "& .MuiInputLabel-outlined": {
-                  transform: "translate(14px, 10px) scale(1)",
+                  transform: "translate(-45px, -52px) scale(1)",
                   "&.MuiInputLabel-shrink": {
-                    transform: "translate(14px, -6px) scale(0.75)",
+                    transform: "translate(-45px, -70px) scale(0.75)",
                   },
                 },
               }}
