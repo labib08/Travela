@@ -23,7 +23,7 @@ const loginAccount = async(req, res) => {
 
     } catch (error) {
         console.log(error);
-        return res.json({success: false, message: error.message})
+        return res.json({success: false, message: "An error occured during Login"})
     }
 }
 
@@ -40,16 +40,13 @@ const createAccount = async(req, res) => {
             [email]
         );
         if (exists.rows.length > 0) {
-            console.log("hehe1");
             return res.json({success: false, message: "User already exists"});
         }
 
         if (!validator.isEmail(email)) {
-            console.log("hehe2");
             return res.json({success: false, message: "Please enter a valid email"});
         }
         if (password.length < 4) {
-            console.log("hehe");
             return res.json({success: false, message: "Please enter a strong password"});
         }
 
@@ -65,7 +62,7 @@ const createAccount = async(req, res) => {
 
     } catch (error) {
         console.log(error);
-        return res.json({success: false, message: error.message});
+        return res.json({success: false, message: "An error occured during sign up"});
     }
 }
 
