@@ -1,6 +1,8 @@
+import axios from "axios";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from 'react-toastify';
 import './SignUp.css';
 interface FormData {
     name: string;
@@ -8,6 +10,8 @@ interface FormData {
     password: string;
   }
 const SignUp = () => {
+    const url = "http://localhost:5000";
+    const navigate = useNavigate();
     const [formData, setFormData] = useState<FormData>({
         name: '',
         email: '',
@@ -17,12 +21,24 @@ const SignUp = () => {
         const {name, value} = e.target;
         setFormData({...formData, [name]: value});
       }
-      const handleSubmit =(e: React.FormEvent<HTMLFormElement>) => {
+      const handleSubmit =async(e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(formData);
+
+        const response = await axios.post(`${url}/api/user/create`, formData);
+        if (response.data.success) {
+          console.log("yay");
+          toast.success("User registered successfully");
+          localStorage.clear();
+          localStorage.setItem("token", response.data.token);
+          navigate('/');
+        }
+        else {
+          toast.error(response.data.message);
+        }
       }
   return (
     <div className="signup">
+      <ToastContainer />
         <input type="checkbox" id="chk" aria-hidden="true"/>
         <div className="signup-main">
             <form onSubmit={handleSubmit}>
