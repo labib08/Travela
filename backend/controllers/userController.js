@@ -23,7 +23,7 @@ const loginAccount = async(req, res) => {
 
     } catch (error) {
         console.log(error);
-        return res.status(400).json({message: error})
+        return res.status(400).json({message: error.message})
     }
 }
 
@@ -39,7 +39,7 @@ const createAccount = async(req, res) => {
             [email]
         );
         if (exists.rows.length > 0) {
-            return res.status(200).json({message: "User already exists"});
+            return res.status(400).json({message: "User already exists"});
         }
 
         if (!validator.isEmail(email)) {
@@ -61,7 +61,7 @@ const createAccount = async(req, res) => {
 
     } catch (error) {
         console.log(error);
-        return res.status(400).json({message: error});
+        return res.status(400).json({message: error.message});
     }
 }
 
