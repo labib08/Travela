@@ -75,7 +75,7 @@ const Login = () => {
                         <FcGoogle className="google-logo" />
                         <span>Login with Google</span>
                     </button>
-                    <p>Don't have an account? <span className="signup-span"> <Link to ="/signup" className="signup-link">Sign up </Link> </span></p>
+                    <p>Don't have an account? <span className="signup-span"> <Link to ="/signup" className="signup-link">Log In </Link> </span></p>
                 </form>
                 {isSuccess ? (
                 <Snackbar
