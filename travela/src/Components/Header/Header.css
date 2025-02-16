@@ -14,7 +14,7 @@
     background-clip: text;
     color: transparent;
 
-    animation: header-ai 120s linear infinite;
+    animation: header-ai 10s linear infinite;
 
     background-size: 200% 200%;
     z-index: 0;

@@ -1,35 +1,15 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import App from './App.tsx';
-import Navbar from './Components/Navbar/Navbar.tsx';
-import './index.css';
-import CreateTrip from './Pages/CreateTrip/CreateTrip.tsx';
-import Login from './Pages/Login/Login.tsx';
-import SignUp from './Pages/SignUp/SignUp.tsx';
+// src/main.tsx (or index.tsx)
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { Provider } from "react-redux";
+import App from "./App.tsx";
+import "./index.css";
+import { store } from "./redux/store";
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element:<App/>
-  },
-  {
-    path: '/create-trip',
-    element:<CreateTrip/>
-  },
-  {
-    path: '/signup',
-    element:<SignUp/>
-  },
-  {
-    path: '/login',
-    element:<Login/>
-  },
-])
-
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Navbar/>
-    <RouterProvider router = {router} />
-  </StrictMode>,
-)
+    <Provider store={store}>
+     <App/>
+    </Provider>
+  </StrictMode>
+);

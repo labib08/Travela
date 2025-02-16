@@ -1,9 +1,13 @@
 import { AI_PROMPT, SelectedBudgetOption, SelectedTravelList } from "@/Data/data";
 import { Button, TextField, Typography } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
 import { Container } from "@mui/system";
 import { useEffect, useRef, useState } from "react";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
+import { useSelector } from "react-redux";
 import { toast, ToastContainer } from 'react-toastify';
+import { RootState } from "../../redux/store";
+import { darkTheme, lightTheme } from "../../theme";
 
 import { chatSession } from "@/engine/AiModel";
 import "./CreateTrip.css";
@@ -26,6 +30,7 @@ type FormData = {
   numTravelers?: string;
 };
 const CreateTrip: React.FC = () => {
+  const mode = useSelector((state: RootState) => state.theme.mode);
   const [place, setPlace] = useState<Option | null>(null);
   const [formData, setFormData] = useState<FormData>({
     location: null,
@@ -56,7 +61,7 @@ const CreateTrip: React.FC = () => {
 
     console.log(FINAL_PROMPT)
     const result = await chatSession.sendMessage(FINAL_PROMPT);
-    console.log(result?.response?.text());
+    console.log("--",result?.response?.text());
   }
   useEffect(()=>{
     console.log(formData)
@@ -83,6 +88,7 @@ const CreateTrip: React.FC = () => {
   }, []);
 
   return (
+    <ThemeProvider theme={mode === "light" ? lightTheme : darkTheme}>
     <div className="create-trip">
       <ToastContainer />
       <Container maxWidth="md" sx={{ padding: "10px" }}>
@@ -90,13 +96,17 @@ const CreateTrip: React.FC = () => {
           Tell us your travel preference
         </Typography>
         <Typography
-          variant="subtitle1"
-          component="p"
-          sx={{ color: "#6b7280", fontSize: "20px", mt: "12px" }}
-        >
-          Just provide some basic information, and our trip planner will
-          generate a customized itinerary based on your preferences.
-        </Typography>
+            variant="subtitle1"
+            component="p"
+            sx={{
+              color: mode === "dark" ? "#f5f5f5" : "#6b7280",
+              fontSize: "20px",
+              mt: "12px",
+            }}
+          >
+            Just provide some basic information, and our trip planner will
+            generate a customized itinerary based on your preferences.
+          </Typography>
         <div className="create-trip-info">
           <div>
             <Typography
@@ -163,11 +173,15 @@ const CreateTrip: React.FC = () => {
               }}
               fullWidth
               sx={{
+                backgroundColor: mode === "light" ? "#fff" : "#333",
+                color: mode === "light" ? "#000" : "#fff",
                 "& .MuiOutlinedInput-root": {
+                  borderColor: mode === "light" ? "#ccc" : "#555",
                   height: "40px",
                 },
                 "& .MuiInputLabel-root": {
                   transition: "all 0.2s ease-in-out",
+                  color: mode === "light" ? "#666" : "#bbb",
                 },
                 "& .MuiInputLabel-outlined": {
                   transform: "translate(-45px, -52px) scale(1)",
@@ -215,7 +229,7 @@ const CreateTrip: React.FC = () => {
                   {" "}
                   {item.title}{" "}
                 </Typography>
-                <Typography sx={{ fontSize: "13px", color: "#6b7280" }}>
+                <Typography sx={{ fontSize: "13px", color: mode === "dark" ? "#f5f5f5" : "#6b7280",}}>
                   {" "}
                   {item.desc}{" "}
                 </Typography>
@@ -260,7 +274,7 @@ const CreateTrip: React.FC = () => {
                   {" "}
                   {item.title}{" "}
                 </Typography>
-                <Typography sx={{ fontSize: "13px", color: "#6b7280" }}>
+                <Typography sx={{ fontSize: "13px", color: mode === "dark" ? "#f5f5f5" : "#6b7280", }}>
                   {" "}
                   {item.desc}{" "}
                 </Typography>
@@ -268,13 +282,25 @@ const CreateTrip: React.FC = () => {
             ))}
           </div>
           <div className="create-trip-button">
-            <Button variant="contained" className="header-button" onClick={onGenerateTrip}>
+            <Button
+              variant="contained"
+              className="header-button"
+              onClick={onGenerateTrip}
+              sx={{
+                color: mode === "dark" ? "#ffffff" : "inherit",
+                '&:hover': {
+                  boxShadow: mode === "dark"
+                    ? '0 4px 10px rgba(255, 255, 255, 0.5)'
+                    : '0 4px 10px rgba(0, 0, 0, 0.7)',
+                },
+              }}>
               Generate Trip
             </Button>
           </div>
         </div>
       </Container>
     </div>
+    </ThemeProvider>
   );
 };
 
