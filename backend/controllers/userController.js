@@ -11,19 +11,19 @@ const loginAccount = async(req, res) => {
             [email]
         );
         if (user.rows.length === 0) {
-            return res.status(400).json({message: "User with this email does not exist"})
+            return res.status(400).json({success: false, message: "User with this email does not exist"})
         }
         const isMatch = await bcrypt.compare(password, user.rows[0].password);
         if (!isMatch) {
-            res.status(400).json({message: "Incorrect Password"});
+            res.status(400).json({success: false, message: "Incorrect Password"});
         }
 
         const token = createToken(user.rows[0].user_id);
-        return res.status(200).json({token})
+        return res.status(200).json({success: true, token})
 
     } catch (error) {
         console.log(error);
-        return res.status(400).json({message: error.message})
+        return res.status(400).json({success: false, message: error.message})
     }
 }
 
@@ -39,14 +39,14 @@ const createAccount = async(req, res) => {
             [email]
         );
         if (exists.rows.length > 0) {
-            return res.status(400).json({message: "User already exists"});
+            return res.status(400).json({success: false, message: "User already exists"});
         }
 
         if (!validator.isEmail(email)) {
-            return res.status(400).json({message: "Please enter a valid email"});
+            return res.status(400).json({success: false, message: "Please enter a valid email"});
         }
         if (password.length < 4) {
-            return res.status(400).json({message: "Please enter a strong password"});
+            return res.status(400).json({success: false, message: "Please enter a strong password"});
         }
 
         const salt = await bcrypt.genSalt(10);
@@ -57,11 +57,11 @@ const createAccount = async(req, res) => {
         );
 
         const token = createToken(user.rows[0].user_id)
-        return res.status(200).json(token);
+        return res.status(200).json({success: true, token});
 
     } catch (error) {
         console.log(error);
-        return res.status(400).json({message: error.message});
+        return res.status(400).json({success: false, message: error.message});
     }
 }
 
