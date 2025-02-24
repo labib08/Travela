@@ -1,15 +1,15 @@
 import { AI_PROMPT, SelectedBudgetOption, SelectedTravelList } from "@/Data/data";
-import { Button, TextField, Typography } from "@mui/material";
+import { chatSession } from "@/engine/AiModel";
+import { Button, CircularProgress, TextField, Typography } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { Container } from "@mui/system";
 import { useEffect, useRef, useState } from "react";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from 'react-toastify';
 import { RootState } from "../../redux/store";
 import { darkTheme, lightTheme } from "../../theme";
-
-import { chatSession } from "@/engine/AiModel";
 import "./CreateTrip.css";
 type Option = {
   label: string;
@@ -30,7 +30,9 @@ type FormData = {
   numTravelers?: string;
 };
 const CreateTrip: React.FC = () => {
+  const [loading, setLoading] = useState(false);
   const mode = useSelector((state: RootState) => state.theme.mode);
+  const navigate = useNavigate();
   const [place, setPlace] = useState<Option | null>(null);
   const [formData, setFormData] = useState<FormData>({
     location: null,
@@ -44,12 +46,15 @@ const CreateTrip: React.FC = () => {
     })
   }
   const onGenerateTrip=async()=> {
+    setLoading(true);
     if (formData && formData.numDays && (formData.numDays > 5 || formData.numDays < 1)) {
       toast.error('Number of days must be between 1 and 5.');
+      setLoading(false);
       return;
     }
     if(!formData.numDays || !formData.budget || !formData.location || !formData.numTravelers) {
       toast.error('Please fill all details');
+      setLoading(false);
       return;
     }
     const FINAL_PROMPT = AI_PROMPT
@@ -61,7 +66,13 @@ const CreateTrip: React.FC = () => {
 
     console.log(FINAL_PROMPT)
     const result = await chatSession.sendMessage(FINAL_PROMPT);
-    console.log("--",result?.response?.text());
+    const result_text = result?.response?.text();
+    console.log("--",result_text);
+    if (result_text) {
+      localStorage.setItem('generatedTrip', result_text);
+      navigate('/view-trip');
+    }
+    setLoading(false);
   }
   useEffect(()=>{
     console.log(formData)
@@ -323,20 +334,32 @@ const CreateTrip: React.FC = () => {
             ))}
           </div>
           <div className="create-trip-button">
-            <Button
-              variant="contained"
-              className="header-button"
-              onClick={onGenerateTrip}
-              sx={{
-                color: mode === "dark" ? "#ffffff" : "inherit",
-                '&:hover': {
-                  boxShadow: mode === "dark"
-                    ? '0 4px 10px rgba(255, 255, 255, 0.5)'
-                    : '0 4px 10px rgba(0, 0, 0, 0.7)',
-                },
-              }}>
-              Generate Trip
-            </Button>
+          <Button
+            variant="contained"
+            className="header-button"
+            onClick={onGenerateTrip}
+            sx={{
+              color: mode === "dark" ? "#ffffff" : "inherit",
+              '&:hover': {
+                boxShadow: mode === "dark"
+                  ? '0 4px 10px rgba(255, 255, 255, 0.5)'
+                  : '0 4px 10px rgba(0, 0, 0, 0.7)',
+              },
+              position: 'relative',
+              padding: '8px 16px',
+              minWidth: '160px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+            disabled={loading}
+          >
+            {loading ? (
+              <CircularProgress size={24} sx={{ position: 'absolute', color: 'white' }} />
+            ) : (
+              'Generate Trip'
+            )}
+          </Button>
           </div>
         </div>
       </Container>
