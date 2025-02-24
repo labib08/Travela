@@ -122,30 +122,71 @@ const CreateTrip: React.FC = () => {
               What is your destination of choice?
             </Typography>
             <GooglePlacesAutocomplete
-              apiKey={import.meta.env.VITE_GOOGLE_PLACE_API_KEY}
-              selectProps={{
-                value: place,
-                onChange: (newValue: Option | null) => {
-                  setPlace(newValue);
-                  console.log(newValue);
-                  handleInputChange('location',newValue);
-                },
-                styles: {
-                  control: (provided, state) => ({
-                    ...provided,
-                    borderColor: state.isFocused ? '#9c27b0' : '#cccccc',
-                    boxShadow: state.isFocused ? '0 0 0 1px #9c27b0' : 'none',
-                    '&:hover': {
-                      borderColor: state.isFocused ? '#9c27b0' : '#cccccc',
-                    },
-                  }),
-                  menu: (provided) => ({
-                    ...provided,
-                    zIndex: 9999,
-                  }),
-                },
-              }}
-            />
+            apiKey={import.meta.env.VITE_GOOGLE_PLACE_API_KEY}
+            selectProps={{
+              value: place,
+              onChange: (newValue: Option | null) => {
+                setPlace(newValue);
+                console.log(newValue);
+                handleInputChange("location", newValue);
+              },
+              styles: {
+                control: (provided, state) => ({
+                  ...provided,
+                  backgroundColor: mode === "dark" ? "#333" : "#fff",
+                  borderColor: state.isFocused
+                    ? "#9c27b0"
+                    : mode === "dark"
+                    ? "#555"
+                    : "#cccccc",
+                  boxShadow: state.isFocused ? "0 0 0 1px #9c27b0" : "none",
+                  "&:hover": {
+                    borderColor: state.isFocused
+                      ? "#9c27b0"
+                      : mode === "dark"
+                      ? "#777"
+                      : "#cccccc",
+                  },
+                  color: mode === "dark" ? "#fff" : "#000",
+                }),
+                menu: (provided) => ({
+                  ...provided,
+                  backgroundColor: mode === "dark" ? "#222" : "#fff",
+                  color: mode === "dark" ? "#fff" : "#000",
+                  zIndex: 9999,
+                }),
+                option: (provided, state) => ({
+                  ...provided,
+                  backgroundColor: state.isFocused
+                    ? mode === "dark"
+                      ? "#444"
+                      : "#f0f0f0"
+                    : mode === "dark"
+                    ? "#222"
+                    : "#fff",
+                  color: state.isFocused
+                    ? mode === "dark"
+                      ? "#fff"
+                      : "#000"
+                    : mode === "dark"
+                    ? "#bbb"
+                    : "#333",
+                }),
+                singleValue: (provided) => ({
+                  ...provided,
+                  color: mode === "dark" ? "#fff" : "#000",
+                }),
+                placeholder: (provided) => ({
+                  ...provided,
+                  color: mode === "dark" ? "#bbb" : "#666",
+                }),
+                input: (provided) => ({
+                  ...provided,
+                  color: mode === "dark" ? "#fff" : "#000",
+                }),
+              },
+            }}
+          />
           </div>
           <div>
             <Typography
