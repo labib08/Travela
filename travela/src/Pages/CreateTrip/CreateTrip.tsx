@@ -1,5 +1,6 @@
 import { AI_PROMPT, SelectedBudgetOption, SelectedTravelList } from "@/Data/data";
 import { chatSession } from "@/engine/AiModel";
+import { FormData, Option } from "@/Types/tripOption";
 import { Button, CircularProgress, TextField, Typography } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { Container } from "@mui/system";
@@ -11,24 +12,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import { RootState } from "../../redux/store";
 import { darkTheme, lightTheme } from "../../theme";
 import "./CreateTrip.css";
-type Option = {
-  label: string;
-  value: {
-    description: string;
-    place_id: string;
-    reference: string;
-    structured_formatting: {
-      main_text: string;
-      secondary_text: string;
-    };
-  };
-};
-type FormData = {
-  location?: Option | null;
-  numDays?: number;
-  budget?: string;
-  numTravelers?: string;
-};
+
 const CreateTrip: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const mode = useSelector((state: RootState) => state.theme.mode);
@@ -70,6 +54,7 @@ const CreateTrip: React.FC = () => {
     console.log("--",result_text);
     if (result_text) {
       localStorage.setItem('generatedTrip', result_text);
+      localStorage.setItem('selectedOption', JSON.stringify(formData));
       navigate('/view-trip');
     }
     setLoading(false);
