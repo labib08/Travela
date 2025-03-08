@@ -25,7 +25,12 @@
    border-radius: 80px !important;
    background: radial-gradient(circle , rgb(217, 48, 147), #317fcd);
    background-size: 200% 200%;
+
   }
+  .header-button:hoverx {
+    background: radial-gradient(circle, #317fcd, rgb(217, 48, 147));
+    background-size: 200% 200%;
+}
   @keyframes header-ai {
     0%{
         background-position: 0% 0%;

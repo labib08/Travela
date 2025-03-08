@@ -324,7 +324,7 @@ const CreateTrip: React.FC = () => {
             className="header-button"
             onClick={onGenerateTrip}
             sx={{
-              color: mode === "dark" ? "#ffffff" : "inherit",
+              color: "#ffffff",
               '&:hover': {
                 boxShadow: mode === "dark"
                   ? '0 4px 10px rgba(255, 255, 255, 0.5)'

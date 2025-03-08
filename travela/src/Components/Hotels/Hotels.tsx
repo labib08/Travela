@@ -1,7 +1,38 @@
-import './Hotels.css'
-const Hotels = () => {
+import Trip from "@/Types/tripType";
+import { Grid2, Typography } from "@mui/material";
+import planeImage from '../../assets/dummy5 copy 2.png';
+import './Hotels.css';
+interface Props {
+    savedTrip: Trip;
+    mode: string;
+}
+const Hotels:React.FC<Props> = ({savedTrip, mode}) => {
   return (
-    <div>Hotels</div>
+        <div className="hotels">
+            <Typography variant="h2" sx = {{fontWeight: 'bold', fontSize: '1.5rem', marginTop: '20px'}}>Hotel Recommendations</Typography>
+            <Grid2 container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                {savedTrip?.hotelOptions?.map((item, index) => (
+                    <Grid2 size={{ xs: 2, sm: 4, md: 4 }} key={index}>
+                    <img src={planeImage} className="hotels-img" />
+                    <div className="hotels-desc">
+                        <Typography variant="h2" sx={{fontWeight: 'medium', fontSize: '1.2rem'}}> {item.hotelName} </Typography>
+                        <Typography
+                        variant="h2"
+                        sx={{
+                            fontWeight: 'medium',
+                            fontSize: '0.9rem',
+                            color: mode === "dark" ? "#cccccc" : "#4b555f",
+                        }}
+                        >📍
+                        {item.hotelAddress}
+                        </Typography>
+                        <Typography variant="h2" sx={{fontWeight: 'medium', fontSize: '1.0rem', }}> {item.price} </Typography>
+                    </div>
+                    </Grid2>
+                ))}
+            </Grid2>
+        </div>
+
   )
 }
 
