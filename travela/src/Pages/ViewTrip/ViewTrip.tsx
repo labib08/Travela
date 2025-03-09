@@ -1,3 +1,4 @@
+import DailyPlan from '@/Components/DailyPlan/DailyPlan';
 import Hotels from '@/Components/Hotels/Hotels.tsx';
 import Information from '@/Components/Information/Information.tsx';
 import { FormData } from '@/Types/tripOption';
@@ -14,6 +15,7 @@ const ViewTrip = () => {
       <div className='view-trip'>
           <Information tripOption = {storedFormData} mode = {mode}/>
           <Hotels savedTrip = {savedTrip} mode = {mode} />
+          <DailyPlan savedTrip = {savedTrip} mode = {mode} />
       </div>
   )
 }

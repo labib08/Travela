@@ -1,0 +1,24 @@
+.daily-plan-places {
+    margin-top: 20px;
+}
+.daily-plan-places-img {
+    height: 130px;
+    width: 130px;
+    border-radius: 20px;
+}
+.daily-plan-places-desc {
+    display: flex;
+    gap: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+    padding: 12px;
+    margin-top: 8px;
+}
+
+.light-mode {
+    --border-color: #acacac;
+}
+
+.dark-mode {
+    --border-color: #dbdbdb;
+}
