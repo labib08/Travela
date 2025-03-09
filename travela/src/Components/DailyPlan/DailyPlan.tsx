@@ -28,7 +28,13 @@ const DailyPlan:React.FC<Props> = ({savedTrip, mode}) => {
                       <div className={`daily-plan-places-desc ${mode === 'dark' ? 'dark-mode' : 'light-mode'}`}>
                         <img src={planeImage} alt='' className='daily-plan-places-img'/>
                         <div>
-                            <Typography variant='body1'>{place.placeName}</Typography>
+                            <Typography variant='body1' sx = {{fontWeight: 'bold'}}>{place.placeName}</Typography>
+                            <Typography
+                                variant="body1"
+                                sx={{ color: mode === "dark" ? "#cccccc" : "#4b555f",}}
+                                >
+                                {place.placeDetails}
+                                </Typography>
                         </div>
                       </div>
 

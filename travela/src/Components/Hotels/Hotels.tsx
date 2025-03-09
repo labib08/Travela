@@ -16,7 +16,7 @@ const Hotels:React.FC<Props> = ({savedTrip, mode}) => {
                     <Grid2 size={{ xs: 2, sm: 4, md: 4 }} key={index} sx={{transition: "all 0.3s ease-in-out","&:hover": {transform: "scale(1.05)",}, cursor: 'pointer'}}>
                     <img src={planeImage} className="hotels-img" />
                     <div className="hotels-desc">
-                        <Typography variant="h2" sx={{fontWeight: 'medium', fontSize: '1.2rem'}}> {item.hotelName} </Typography>
+                        <Typography variant="h2" sx={{fontWeight: 'bold', fontSize: '1.2rem'}}> {item.hotelName} </Typography>
                         <Typography
                         variant="h2"
                         sx={{
