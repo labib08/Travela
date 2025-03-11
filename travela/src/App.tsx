@@ -10,6 +10,7 @@ import Navbar from "./Components/Navbar/Navbar";
 import CreateTrip from "./Pages/CreateTrip/CreateTrip";
 import Login from "./Pages/Login/Login";
 import SignUp from "./Pages/SignUp/SignUp";
+import SpecificHotel from "./Pages/SpecificHotel/SpecificHotel";
 import ViewTrip from "./Pages/ViewTrip/ViewTrip";
 import { RootState } from "./redux/store";
 import { setTheme } from "./redux/themeSlice";
@@ -38,6 +39,7 @@ const App: React.FC = () => {
       <Route path="/signup" element={<SignUp/>} />
       <Route path="/login" element={<Login/>} />
       <Route path = "/view-trip" element = {<ViewTrip/>} />
+      <Route path = "/hotel" element = {<SpecificHotel/>} />
       </Routes>
       </BrowserRouter>
     </ThemeProvider>
